@@ -1,0 +1,3 @@
+{
+  "extends": "@papaya-test/config/tsconfig.base.json"
+}
