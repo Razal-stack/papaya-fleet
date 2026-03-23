@@ -1,0 +1,58 @@
+# Dependencies
+node_modules
+**/node_modules
+**/.pnp
+**/.pnp.js
+
+# Testing
+coverage
+**/.nyc_output
+**/cypress/videos
+**/cypress/screenshots
+**/playwright-report
+**/.playwright
+
+# Build outputs
+dist
+build
+out
+**/.next
+**/.nuxt
+**/.cache
+**/.turbo
+
+# Development files
+.git
+.gitignore
+*.md
+.env
+.env.*
+!.env.example
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*.swn
+.DS_Store
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# CI
+.github
+.gitlab-ci.yml
+.circleci
+
+# Misc
+tmp
+temp
+*.tmp

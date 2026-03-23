@@ -1,0 +1,27 @@
+{
+  "name": "@papaya-fleet/utils",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "tailwind-merge": "^3.5.0",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@papaya-fleet/config": "workspace:*",
+    "typescript": "^5",
+    "vitest": "^4.1.0"
+  }
+}

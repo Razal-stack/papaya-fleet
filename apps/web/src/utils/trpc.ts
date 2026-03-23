@@ -1,5 +1,5 @@
-import type { AppRouter } from "@papaya-test/api/routers/index";
-import { env } from "@papaya-test/env/web";
+import type { AppRouter } from "@papaya-fleet/api/routers/index";
+import { env } from "@papaya-fleet/env/web";
 import { QueryCache, QueryClient } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";

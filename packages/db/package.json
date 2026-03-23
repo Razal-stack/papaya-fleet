@@ -1,5 +1,5 @@
 {
-  "name": "@papaya-test/db",
+  "name": "@papaya-fleet/db",
   "type": "module",
   "exports": {
     ".": {
@@ -18,10 +18,11 @@
     "db:start": "docker compose up -d",
     "db:watch": "docker compose up",
     "db:stop": "docker compose stop",
-    "db:down": "docker compose down"
+    "db:down": "docker compose down",
+    "db:seed": "bun run seed.ts"
   },
   "dependencies": {
-    "@papaya-test/env": "workspace:*",
+    "@papaya-fleet/env": "workspace:*",
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "catalog:",
     "dotenv": "catalog:",
@@ -29,7 +30,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@papaya-test/config": "workspace:*",
+    "@papaya-fleet/config": "workspace:*",
     "@types/pg": "^8.16.0",
     "prisma": "^7.2.0",
     "typescript": "^5"

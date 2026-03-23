@@ -1,5 +1,5 @@
 {
-  "name": "papaya-test",
+  "name": "papaya-fleet",
   "private": true,
   "workspaces": {
     "packages": [
@@ -30,27 +30,51 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "check-types": "turbo check-types",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "test": "turbo test",
+    "test:e2e": "turbo test:e2e",
+    "ci": "./scripts/ci-checks.sh",
+    "ci:all": "./scripts/ci-checks.sh --e2e",
+    "check": "./scripts/ci-checks.sh",
+    "check:all": "./scripts/ci-checks.sh --e2e",
     "dev:web": "turbo -F web dev",
     "dev:server": "turbo -F server dev",
-    "db:push": "turbo -F @papaya-test/db db:push",
-    "db:studio": "turbo -F @papaya-test/db db:studio",
-    "db:generate": "turbo -F @papaya-test/db db:generate",
-    "db:migrate": "turbo -F @papaya-test/db db:migrate",
-    "db:start": "turbo -F @papaya-test/db db:start",
-    "db:watch": "turbo -F @papaya-test/db db:watch",
-    "db:stop": "turbo -F @papaya-test/db db:stop",
-    "db:down": "turbo -F @papaya-test/db db:down"
+    "db:push": "turbo -F @papaya-fleet/db db:push",
+    "db:studio": "turbo -F @papaya-fleet/db db:studio",
+    "db:generate": "turbo -F @papaya-fleet/db db:generate",
+    "db:migrate": "turbo -F @papaya-fleet/db db:migrate",
+    "db:start": "turbo -F @papaya-fleet/db db:start",
+    "db:watch": "turbo -F @papaya-fleet/db db:watch",
+    "db:stop": "turbo -F @papaya-fleet/db db:stop",
+    "db:down": "turbo -F @papaya-fleet/db db:down",
+    "db:seed": "turbo -F @papaya-fleet/db db:seed",
+    "docker:up": "./scripts/docker-dev.sh up",
+    "docker:down": "./scripts/docker-dev.sh down",
+    "docker:logs": "./scripts/docker-dev.sh logs",
+    "docker:reset": "./scripts/docker-dev.sh reset",
+    "docker:init": "./scripts/docker-init.sh"
   },
   "dependencies": {
-    "@papaya-test/env": "workspace:*",
+    "@hookform/resolvers": "^5.2.2",
+    "@papaya-fleet/env": "workspace:*",
     "dotenv": "catalog:",
+    "react-hook-form": "^7.72.0",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@papaya-test/config": "workspace:*",
+    "@biomejs/biome": "^2.4.8",
+    "@papaya-fleet/config": "workspace:*",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/bun": "catalog:",
+    "@vitest/ui": "^4.1.0",
+    "happy-dom": "^20.8.4",
     "turbo": "^2.8.12",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.0"
   },
   "packageManager": "bun@1.2.23"
 }

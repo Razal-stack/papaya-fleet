@@ -1,5 +1,5 @@
 {
-  "name": "@papaya-test/api",
+  "name": "@papaya-fleet/api",
   "type": "module",
   "exports": {
     ".": {
@@ -11,16 +11,16 @@
   },
   "scripts": {},
   "dependencies": {
-    "@papaya-test/auth": "workspace:*",
-    "@papaya-test/db": "workspace:*",
-    "@papaya-test/env": "workspace:*",
+    "@papaya-fleet/auth": "workspace:*",
+    "@papaya-fleet/db": "workspace:*",
+    "@papaya-fleet/env": "workspace:*",
     "@trpc/client": "catalog:",
     "@trpc/server": "catalog:",
     "dotenv": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@papaya-test/config": "workspace:*",
+    "@papaya-fleet/config": "workspace:*",
     "hono": "catalog:",
     "typescript": "^5"
   }

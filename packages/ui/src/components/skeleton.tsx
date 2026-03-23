@@ -1,4 +1,4 @@
-import { cn } from "@papaya-test/ui/lib/utils";
+import { cn } from "@papaya-fleet/ui/lib/utils";
 
 function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (

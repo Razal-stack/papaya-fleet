@@ -1,50 +1,63 @@
-import { useQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
-
-import { trpc } from "@/utils/trpc";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, LayoutDashboard } from "lucide-react";
+import { useAuth } from "@/contexts/auth-context";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
 });
 
-const TITLE_TEXT = `
- ██████╗ ███████╗████████╗████████╗███████╗██████╗
- ██╔══██╗██╔════╝╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗
- ██████╔╝█████╗     ██║      ██║   █████╗  ██████╔╝
- ██╔══██╗██╔══╝     ██║      ██║   ██╔══╝  ██╔══██╗
- ██████╔╝███████╗   ██║      ██║   ███████╗██║  ██║
- ╚═════╝ ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝
-
- ████████╗    ███████╗████████╗ █████╗  ██████╗██╗  ██╗
- ╚══██╔══╝    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝
-    ██║       ███████╗   ██║   ███████║██║     █████╔╝
-    ██║       ╚════██║   ██║   ██╔══██║██║     ██╔═██╗
-    ██║       ███████║   ██║   ██║  ██║╚██████╗██║  ██╗
-    ╚═╝       ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
- `;
-
 function HomeComponent() {
-  const healthCheck = useQuery(trpc.healthCheck.queryOptions());
+  const { user } = useAuth();
 
+  // If user is authenticated, show a different view
+  if (user) {
+    return (
+      <div className="min-h-[calc(100vh-56px)] flex flex-col items-center justify-center">
+        <div className="w-full max-w-4xl mx-auto px-4 text-center -mt-12">
+          <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 dark:text-white mb-4">
+            Welcome back, {user.name?.split(" ")[0]}!
+          </h1>
+
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            Your fleet management dashboard is ready
+          </p>
+
+          <Link to="/dashboard">
+            <button className="btn-primary">
+              <LayoutDashboard className="h-4 w-4" />
+              Go to Dashboard
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Show sign in/up options for non-authenticated users
   return (
-    <div className="container mx-auto max-w-3xl px-4 py-2">
-      <pre className="overflow-x-auto font-mono text-sm">{TITLE_TEXT}</pre>
-      <div className="grid gap-6">
-        <section className="rounded-lg border p-4">
-          <h2 className="mb-2 font-medium">API Status</h2>
-          <div className="flex items-center gap-2">
-            <div
-              className={`h-2 w-2 rounded-full ${healthCheck.data ? "bg-green-500" : "bg-red-500"}`}
-            />
-            <span className="text-sm text-muted-foreground">
-              {healthCheck.isLoading
-                ? "Checking..."
-                : healthCheck.data
-                  ? "Connected"
-                  : "Disconnected"}
-            </span>
-          </div>
-        </section>
+    <div className="min-h-[calc(100vh-56px)] flex flex-col items-center justify-center">
+      <div className="w-full max-w-4xl mx-auto px-4 text-center -mt-12">
+        <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 dark:text-white mb-4">
+          Welcome to Papaya
+        </h1>
+
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+          Fleet management intelligence platform
+        </p>
+
+        <div className="flex items-center justify-center gap-3">
+          <Link to="/login?tab=signup">
+            <button className="btn-primary">
+              Get Started
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </Link>
+
+          <Link to="/login">
+            <button className="btn-secondary">Sign In</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

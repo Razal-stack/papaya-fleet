@@ -1,5 +1,5 @@
-import prisma from "@papaya-test/db";
-import { env } from "@papaya-test/env/server";
+import prisma from "@papaya-fleet/db";
+import { env } from "@papaya-fleet/env/server";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 

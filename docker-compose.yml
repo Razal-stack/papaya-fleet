@@ -1,0 +1,86 @@
+name: papaya-fleet
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: papaya-fleet-postgres
+    environment:
+      POSTGRES_DB: papaya-fleet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5440:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - papaya-network
+
+  # Server Application
+  server:
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+      target: ${BUILD_TARGET:-dev}
+    container_name: papaya-fleet-server
+    ports:
+      - "3101:3101"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - PORT=3101
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/papaya-fleet
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET:-supersecretkey12345678901234567890}
+      - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3101}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3100}
+      - AUTO_SEED=${AUTO_SEED:-false}
+    volumes:
+      # For development hot reload
+      - ./apps/server:/app/apps/server:ro
+      - ./packages:/app/packages:ro
+      - /app/node_modules
+      - /app/apps/server/node_modules
+      - /app/packages/*/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - papaya-network
+    restart: unless-stopped
+
+  # Web Application
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: ${BUILD_TARGET:-dev}
+    container_name: papaya-fleet-web
+    ports:
+      - "3100:3100"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:3101}
+      - VITE_AUTH_URL=${VITE_AUTH_URL:-http://localhost:3101}
+    volumes:
+      # For development hot reload
+      - ./apps/web:/app/apps/web:ro
+      - ./packages:/app/packages:ro
+      - /app/node_modules
+      - /app/apps/web/node_modules
+      - /app/packages/*/node_modules
+    depends_on:
+      - server
+    networks:
+      - papaya-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  papaya-network:
+    driver: bridge

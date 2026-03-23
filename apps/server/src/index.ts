@@ -1,8 +1,8 @@
 import { trpcServer } from "@hono/trpc-server";
-import { createContext } from "@papaya-test/api/context";
-import { appRouter } from "@papaya-test/api/routers/index";
-import { auth } from "@papaya-test/auth";
-import { env } from "@papaya-test/env/server";
+import { createContext } from "@papaya-fleet/api/context";
+import { appRouter } from "@papaya-fleet/api/routers/index";
+import { auth } from "@papaya-fleet/auth";
+import { env } from "@papaya-fleet/env/server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
@@ -36,4 +36,18 @@ app.get("/", (c) => {
   return c.text("OK");
 });
 
-export default app;
+app.get("/health", (c) => {
+  return c.json({
+    status: "healthy",
+    timestamp: new Date().toISOString(),
+    service: "papaya-fleet-api",
+  });
+});
+
+const port = Number(process.env.PORT) || 3101;
+console.log(`🚀 Server starting on port ${port}...`);
+
+export default {
+  port,
+  fetch: app.fetch,
+};

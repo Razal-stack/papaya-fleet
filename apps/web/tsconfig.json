@@ -13,7 +13,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@papaya-test/ui/*": ["../../packages/ui/src/*"]
+      "@papaya-fleet/ui/*": ["../../packages/ui/src/*"]
     }
   }
 }

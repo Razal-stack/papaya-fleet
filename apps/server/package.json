@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@hono/trpc-server": "^0.4.0",
-    "@papaya-test/api": "workspace:*",
-    "@papaya-test/auth": "workspace:*",
-    "@papaya-test/db": "workspace:*",
-    "@papaya-test/env": "workspace:*",
+    "@papaya-fleet/api": "workspace:*",
+    "@papaya-fleet/auth": "workspace:*",
+    "@papaya-fleet/db": "workspace:*",
+    "@papaya-fleet/env": "workspace:*",
     "@trpc/server": "catalog:",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
@@ -22,7 +22,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@papaya-test/config": "workspace:*",
+    "@papaya-fleet/config": "workspace:*",
     "@types/bun": "catalog:",
     "tsdown": "^0.16.5",
     "typescript": "^5"

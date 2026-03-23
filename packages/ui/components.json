@@ -12,11 +12,11 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@papaya-test/ui/components",
-    "utils": "@papaya-test/ui/lib/utils",
-    "hooks": "@papaya-test/ui/hooks",
-    "lib": "@papaya-test/ui/lib",
-    "ui": "@papaya-test/ui/components"
+    "components": "@papaya-fleet/ui/components",
+    "utils": "@papaya-fleet/ui/lib/utils",
+    "hooks": "@papaya-fleet/ui/hooks",
+    "lib": "@papaya-fleet/ui/lib",
+    "ui": "@papaya-fleet/ui/components"
   },
   "menuColor": "default",
   "menuAccent": "subtle",

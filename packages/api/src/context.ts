@@ -1,4 +1,4 @@
-import { auth } from "@papaya-test/auth";
+import { auth } from "@papaya-fleet/auth";
 import type { Context as HonoContext } from "hono";
 
 export type CreateContextOptions = {

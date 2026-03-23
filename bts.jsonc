@@ -13,7 +13,7 @@
   "$schema": "https://r2.better-t-stack.dev/schema.json",
   "version": "3.26.0",
   "createdAt": "2026-03-20T12:49:36.640Z",
-  "reproducibleCommand": "bun create better-t-stack@latest papaya-test --frontend tanstack-router --backend hono --runtime bun --database postgres --orm prisma --api trpc --auth better-auth --payments none --addons turborepo --examples none --db-setup docker --web-deploy none --server-deploy none --git --package-manager bun --install",
+  "reproducibleCommand": "bun create better-t-stack@latest papaya-fleet --frontend tanstack-router --backend hono --runtime bun --database postgres --orm prisma --api trpc --auth better-auth --payments none --addons turborepo --examples none --db-setup docker --web-deploy none --server-deploy none --git --package-manager bun --install",
   "database": "postgres",
   "orm": "prisma",
   "backend": "hono",
@@ -27,5 +27,5 @@
   "dbSetup": "docker",
   "api": "trpc",
   "webDeploy": "none",
-  "serverDeploy": "none",
+  "serverDeploy": "none"
 }

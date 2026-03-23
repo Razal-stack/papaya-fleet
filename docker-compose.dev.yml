@@ -1,0 +1,56 @@
+# Development-specific configuration
+# Usage: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  server:
+    build:
+      target: dev
+    environment:
+      - NODE_ENV=development
+      - AUTO_SEED=true
+    volumes:
+      # Mount source code for hot reload
+      - ./apps/server:/app/apps/server
+      - ./packages:/app/packages
+      - ./turbo.json:/app/turbo.json
+      - ./biome.json:/app/biome.json
+      # Preserve node_modules
+      - /app/node_modules
+      - /app/apps/server/node_modules
+      - /app/packages/api/node_modules
+      - /app/packages/auth/node_modules
+      - /app/packages/config/node_modules
+      - /app/packages/db/node_modules
+      - /app/packages/env/node_modules
+      - /app/packages/forms/node_modules
+      - /app/packages/ui/node_modules
+      - /app/packages/utils/node_modules
+      - /app/packages/validation/node_modules
+    command: ["bun", "run", "--hot", "apps/server/src/index.ts"]
+
+  web:
+    build:
+      target: dev
+    environment:
+      - NODE_ENV=development
+      - VITE_HMR_PORT=3100
+      - VITE_HMR_HOST=localhost
+    volumes:
+      # Mount source code for hot reload
+      - ./apps/web:/app/apps/web
+      - ./packages:/app/packages
+      - ./turbo.json:/app/turbo.json
+      - ./biome.json:/app/biome.json
+      # Preserve node_modules
+      - /app/node_modules
+      - /app/apps/web/node_modules
+      - /app/packages/api/node_modules
+      - /app/packages/auth/node_modules
+      - /app/packages/config/node_modules
+      - /app/packages/db/node_modules
+      - /app/packages/env/node_modules
+      - /app/packages/forms/node_modules
+      - /app/packages/ui/node_modules
+      - /app/packages/utils/node_modules
+      - /app/packages/validation/node_modules
+    command: ["bun", "run", "dev"]

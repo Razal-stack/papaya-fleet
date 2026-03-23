@@ -1,4 +1,4 @@
-import { env } from "@papaya-test/env/web";
+import { env } from "@papaya-fleet/env/web";
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({

@@ -8,3 +8,240 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// Enums for better type safety
+enum VehicleStatus {
+  ACTIVE
+  MAINTENANCE
+  REPAIR
+  INACTIVE
+  RETIRED
+  RESERVED
+}
+
+enum VehicleCategory {
+  SEDAN
+  SUV
+  TRUCK
+  VAN
+  MINIVAN
+  PICKUP
+  MOTORCYCLE
+  BUS
+  TRAILER
+  SPECIALIZED
+}
+
+enum FuelType {
+  GASOLINE
+  DIESEL
+  ELECTRIC
+  HYBRID
+  CNG
+  LPG
+  HYDROGEN
+}
+
+enum DriverStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+  SUSPENDED
+  TERMINATED
+  TRAINING
+}
+
+enum LicenseClass {
+  A    // Motorcycle
+  B    // Car
+  C    // Truck
+  D    // Bus
+  CDL  // Commercial
+  SPECIAL
+}
+
+// Vehicle model - comprehensive fleet vehicle management
+model Vehicle {
+  id                String           @id @default(cuid())
+  vin               String           @unique // Vehicle Identification Number
+  license_plate     String           @unique
+  make              String
+  model             String
+  year              Int
+  color             String?
+
+  // Classification
+  category          VehicleCategory
+  fuel_type         FuelType
+  transmission_type String?          // Manual, Automatic, CVT
+
+  // Status and tracking
+  status            VehicleStatus    @default(ACTIVE)
+  current_mileage   Float            @default(0)
+  last_service_date DateTime?
+  next_service_date DateTime?
+
+  // Location tracking
+  current_location  String?
+  home_location     String?
+
+  // Registration and compliance
+  registration_number String?
+  registration_expiry DateTime?
+  insurance_policy_no String?
+  insurance_expiry    DateTime?
+
+  // Capacity and specifications
+  seating_capacity  Int?
+  cargo_capacity    Float?           // in cubic meters
+  fuel_capacity     Float?           // in liters
+
+  // Purchase/Lease information
+  purchase_date     DateTime?
+  purchase_price    Float?
+  lease_end_date    DateTime?
+
+  // Fleet management
+  department        String?
+  cost_center       String?
+
+  // Relationships
+  primary_driver_id String?          @unique
+  primary_driver    Driver?          @relation("PrimaryVehicle", fields: [primary_driver_id], references: [id], onDelete: SetNull)
+  assignments       VehicleAssignment[]
+  maintenance_logs  MaintenanceLog[]
+
+  // Metadata
+  notes             String?
+  tags              String[]         @default([])
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+
+  @@index([status])
+  @@index([category])
+  @@index([current_location])
+  @@index([department])
+}
+
+// Driver model - comprehensive driver management
+model Driver {
+  id                String           @id @default(cuid())
+  employee_id       String           @unique
+
+  // Personal information
+  first_name        String
+  last_name         String
+  middle_name       String?
+  email             String           @unique
+  phone             String
+  alternate_phone   String?
+  date_of_birth     DateTime
+
+  // Address
+  street_address    String
+  city              String
+  state_province    String
+  postal_code       String
+  country           String           @default("USA")
+
+  // License information
+  license_number    String           @unique
+  license_class     LicenseClass
+  license_state     String
+  license_expiry    DateTime
+  license_restrictions String?
+
+  // Employment
+  status            DriverStatus     @default(ACTIVE)
+  hire_date         DateTime
+  termination_date  DateTime?
+  department        String?
+  supervisor_name   String?
+  supervisor_email  String?
+
+  // Emergency contact
+  emergency_contact_name  String?
+  emergency_contact_phone String?
+  emergency_contact_relation String?
+
+  // Certifications and training
+  certifications    String[]         @default([])
+  last_training_date DateTime?
+  next_training_date DateTime?
+
+  // Performance metrics
+  safety_score      Float?           @default(100) // 0-100
+  total_miles_driven Float           @default(0)
+  accidents_count   Int             @default(0)
+  violations_count  Int             @default(0)
+
+  // Relationships
+  primary_vehicle   Vehicle?         @relation("PrimaryVehicle")
+  assignments       VehicleAssignment[]
+
+  // Metadata
+  notes             String?
+  tags              String[]         @default([])
+  profile_picture   String?          // URL to profile picture
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+
+  @@index([status])
+  @@index([department])
+  @@index([license_expiry])
+}
+
+// Vehicle-Driver Assignment History
+model VehicleAssignment {
+  id                String           @id @default(cuid())
+
+  vehicle_id        String
+  vehicle           Vehicle          @relation(fields: [vehicle_id], references: [id], onDelete: Cascade)
+
+  driver_id         String
+  driver            Driver           @relation(fields: [driver_id], references: [id], onDelete: Cascade)
+
+  assigned_date     DateTime         @default(now())
+  unassigned_date   DateTime?
+
+  start_mileage     Float?
+  end_mileage       Float?
+
+  assignment_reason String?
+  notes             String?
+
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+
+  @@unique([vehicle_id, driver_id, assigned_date])
+  @@index([vehicle_id])
+  @@index([driver_id])
+  @@index([assigned_date])
+}
+
+// Maintenance Log for vehicles
+model MaintenanceLog {
+  id                String           @id @default(cuid())
+
+  vehicle_id        String
+  vehicle           Vehicle          @relation(fields: [vehicle_id], references: [id], onDelete: Cascade)
+
+  maintenance_type  String           // Oil change, Tire rotation, etc.
+  description       String
+  performed_date    DateTime
+  performed_by      String
+
+  mileage_at_service Float
+  cost              Float?
+
+  next_service_due  DateTime?
+  next_service_mileage Float?
+
+  parts_replaced    String[]         @default([])
+
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+
+  @@index([vehicle_id])
+  @@index([performed_date])
+}
