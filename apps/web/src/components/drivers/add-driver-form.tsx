@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@papaya-fleet/ui/components/select";
 import { Textarea } from "@papaya-fleet/ui/components/textarea";
+import { type ApiError, toApiError } from "@papaya-fleet/utils";
 import { type CreateDriverInput, createDriverSchema } from "@papaya-fleet/validation";
 import { useMutation } from "@tanstack/react-query";
 import { AlertTriangle, Briefcase, FileText, Loader2, Shield, User, Wand2 } from "lucide-react";
@@ -112,7 +113,7 @@ const US_STATES = [
 export function AddDriverForm({ onSuccess, onCancel }: AddDriverFormProps) {
   // Initialize form with Zod schema using react-hook-form directly
   const form = useForm<CreateDriverInput>({
-    resolver: zodResolver(createDriverSchema), // Use zodResolver for validation
+    resolver: zodResolver(createDriverSchema),
     defaultValues: getDriverFormDefaults(), // Use comprehensive defaults
     mode: "onChange", // Real-time validation for better UX
   });
@@ -127,8 +128,9 @@ export function AddDriverForm({ onSuccess, onCancel }: AddDriverFormProps) {
       form.reset(); // Reset form after success
       onSuccess();
     },
-    onError: (error: any) => {
-      toast.error(error.message || "Failed to create driver");
+    onError: (error: unknown) => {
+      const apiError = toApiError(error);
+      toast.error(apiError.message || "Failed to create driver");
     },
   });
 

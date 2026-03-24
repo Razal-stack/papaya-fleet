@@ -49,17 +49,11 @@ describe("Object Transformers", () => {
 
     it("should handle arrays", () => {
       const input = {
-        user_list: [
-          { first_name: "John" },
-          { first_name: "Jane" },
-        ],
+        user_list: [{ first_name: "John" }, { first_name: "Jane" }],
       };
 
       const expected = {
-        userList: [
-          { firstName: "John" },
-          { firstName: "Jane" },
-        ],
+        userList: [{ firstName: "John" }, { firstName: "Jane" }],
       };
 
       expect(snakeToCamelObject(input)).toEqual(expected);
@@ -118,17 +112,11 @@ describe("Object Transformers", () => {
 
     it("should handle arrays", () => {
       const input = {
-        userList: [
-          { firstName: "John" },
-          { firstName: "Jane" },
-        ],
+        userList: [{ firstName: "John" }, { firstName: "Jane" }],
       };
 
       const expected = {
-        user_list: [
-          { first_name: "John" },
-          { first_name: "Jane" },
-        ],
+        user_list: [{ first_name: "John" }, { first_name: "Jane" }],
       };
 
       expect(camelToSnakeObject(input)).toEqual(expected);

@@ -24,6 +24,7 @@ import {
   FormMessage,
 } from "@papaya-fleet/ui/components/form";
 import { Input } from "@papaya-fleet/ui/components/input";
+import { toApiError } from "@papaya-fleet/utils";
 // Validation schemas
 import { type LoginInput, loginSchema } from "@papaya-fleet/validation";
 import { useNavigate } from "@tanstack/react-router";
@@ -61,9 +62,12 @@ export function LoginFormExample() {
 
       // Navigate to dashboard
       navigate({ to: "/dashboard" });
-    } catch (error: any) {
+    } catch (error) {
+      // Convert to API error
+      const apiError = toApiError(error);
+
       // Show error message
-      toast.error(error.message || "Invalid credentials");
+      toast.error(apiError.message || "Invalid credentials");
 
       // Set form-level error
       form.setError("root", {
