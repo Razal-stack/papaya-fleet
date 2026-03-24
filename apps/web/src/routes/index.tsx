@@ -22,12 +22,10 @@ function HomeComponent() {
             Your fleet management dashboard is ready
           </p>
 
-          <Link to="/dashboard">
-            <button className="btn-primary">
-              <LayoutDashboard className="h-4 w-4" />
-              Go to Dashboard
-              <ArrowRight className="h-4 w-4" />
-            </button>
+          <Link to="/dashboard" className="btn-primary inline-flex">
+            <LayoutDashboard className="h-4 w-4" />
+            Go to Dashboard
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>

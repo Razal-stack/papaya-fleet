@@ -12,15 +12,15 @@ import {
 import { ScrollArea } from "@papaya-fleet/ui/components/scroll-area";
 import { cn } from "@papaya-fleet/ui/lib/utils";
 import { Loader2 } from "lucide-react";
-import type * as React from "react";
+import type { ReactNode } from "react";
 
 interface FormModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: string;
   description?: string;
-  children: React.ReactNode;
-  footer?: React.ReactNode;
+  children: ReactNode;
+  footer?: ReactNode;
   size?: "sm" | "md" | "lg" | "xl" | "2xl" | "4xl" | "full";
   className?: string;
   bodyClassName?: string;
@@ -118,14 +118,14 @@ export function FormModalBody({
   className,
   scrollable = true,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   scrollable?: boolean;
 }) {
   if (scrollable) {
     return (
       <ScrollArea className={cn("h-[calc(70vh-12rem)] px-1 pr-4", className)}>
-        {children}
+        <div>{children}</div>
       </ScrollArea>
     );
   }
@@ -138,7 +138,7 @@ export function FormModalSection({
   className,
 }: {
   title?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }) {
   return (

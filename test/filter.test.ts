@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 describe("Filter Test", () => {
   it("should perform case-insensitive filtering", () => {
     // Simulate the fuzzy filter function
-    const fuzzyFilter = (value: any, filterValue: any) => {
+    const fuzzyFilter = (value: unknown, filterValue: unknown) => {
       if (value == null) return false;
       return String(value).toLowerCase() === String(filterValue).toLowerCase();
     };
@@ -26,7 +26,7 @@ describe("Filter Test", () => {
   });
 
   it("should handle null and undefined values", () => {
-    const fuzzyFilter = (value: any, filterValue: any) => {
+    const fuzzyFilter = (value: unknown, filterValue: unknown) => {
       if (value == null) return false;
       return String(value).toLowerCase() === String(filterValue).toLowerCase();
     };

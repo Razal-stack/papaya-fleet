@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@papaya-fleet/ui/components/card";
 import { cn } from "@papaya-fleet/ui/lib/utils";
+import type { IconComponent } from "@papaya-fleet/utils";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Activity, AlertCircle, ChevronRight, MapPin, Package, Truck, Users } from "lucide-react";
@@ -183,7 +184,7 @@ function StatsCard({
   value: string;
   change: string;
   trend: "up" | "down";
-  icon: any;
+  icon: IconComponent;
 }) {
   return (
     <Card className="border border-gray-200/50 dark:border-gray-800/30 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 bg-white/80 dark:bg-gray-900/50 backdrop-blur-sm">

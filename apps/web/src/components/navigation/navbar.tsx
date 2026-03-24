@@ -87,7 +87,7 @@ export function Navbar({ user }: NavbarProps) {
             </div>
 
             {/* Mobile Search */}
-            <button className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors">
+            <button type="button" className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors">
               <Search className="h-4 w-4 text-gray-600 dark:text-gray-400" />
             </button>
 
@@ -99,11 +99,11 @@ export function Navbar({ user }: NavbarProps) {
               <UserDropdown user={user} />
             ) : (
               <div className="flex items-center gap-2">
-                <Link to="/login">
-                  <button className="btn-ghost btn-sm">Sign In</button>
+                <Link to="/login" className="btn-ghost btn-sm">
+                  Sign In
                 </Link>
-                <Link to="/login?tab=signup">
-                  <button className="btn-primary btn-sm">Get Started</button>
+                <Link to="/login?tab=signup" className="btn-primary btn-sm">
+                  Get Started
                 </Link>
               </div>
             )}

@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@papaya-fleet/ui/components/select";
 import { Textarea } from "@papaya-fleet/ui/components/textarea";
+import { type ApiError, toApiError } from "@papaya-fleet/utils";
 import { type CreateVehicleInput, createVehicleSchema } from "@papaya-fleet/validation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Car, DollarSign, FileText, Loader2, MapPin, Package, Wand2, Wrench } from "lucide-react";
@@ -81,7 +82,7 @@ const TRANSMISSION_TYPES = [
 export function AddVehicleForm({ onSuccess, onCancel }: AddVehicleFormProps) {
   // Initialize form with Zod schema using react-hook-form directly
   const form = useForm<CreateVehicleInput>({
-    resolver: zodResolver(createVehicleSchema), // Use zodResolver for validation
+    resolver: zodResolver(createVehicleSchema),
     defaultValues: getVehicleFormDefaults(), // Use comprehensive defaults
     mode: "onChange", // Real-time validation for better UX
   });
@@ -106,8 +107,9 @@ export function AddVehicleForm({ onSuccess, onCancel }: AddVehicleFormProps) {
       form.reset(); // Reset form after success
       onSuccess();
     },
-    onError: (error: any) => {
-      toast.error(error.message || "Failed to create vehicle");
+    onError: (error: unknown) => {
+      const apiError = toApiError(error);
+      toast.error(apiError.message || "Failed to create vehicle");
     },
   });
 
