@@ -2,6 +2,22 @@
 
 A fleet management system built with TypeScript, React, and Bun.
 
+## Screenshots
+<img width="1912" height="901" alt="Screenshot 2026-03-24 at 00 27 19" src="https://github.com/user-attachments/assets/f150dbc1-227d-47cd-829b-098a0305fd15" />
+
+<img width="1920" height="959" alt="Screenshot 2026-03-24 at 00 27 52" src="https://github.com/user-attachments/assets/161ebab5-0b67-4b03-9597-be7321732f1f" />
+
+<img width="1913" height="960" alt="Screenshot 2026-03-24 at 00 28 22" src="https://github.com/user-attachments/assets/274e73c4-566a-4202-b9ce-7ced0b36ee77" />
+
+<img width="1920" height="959" alt="Screenshot 2026-03-24 at 00 29 41" src="https://github.com/user-attachments/assets/04367652-4675-4587-9471-d8756edfb14c" />
+
+<img width="1920" height="762" alt="Screenshot 2026-03-24 at 00 30 14" src="https://github.com/user-attachments/assets/ce7e536b-1e59-406c-add8-3a6f3748b38d" />
+
+<img width="1918" height="960" alt="Screenshot 2026-03-24 at 00 30 30" src="https://github.com/user-attachments/assets/fd1c4356-f838-4305-8e8f-e01e0a7ad4d3" />
+
+<img width="1920" height="957" alt="Screenshot 2026-03-24 at 00 30 54" src="https://github.com/user-attachments/assets/b350f14a-b642-4c66-a57d-aa1a3e88c865" />
+
+
 ## Quick Start
 
 ### Docker Setup (Recommended)
