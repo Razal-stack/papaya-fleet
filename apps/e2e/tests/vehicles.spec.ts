@@ -2,7 +2,7 @@ import { db } from "@papaya-fleet/db";
 import { expect, test } from "@playwright/test";
 
 test.describe("Vehicle Management", () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async () => {
     // Clear test data
     await db.vehicleAssignment.deleteMany({});
     await db.maintenanceLog.deleteMany({});

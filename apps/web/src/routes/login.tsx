@@ -1,4 +1,5 @@
 import { Card } from "@papaya-fleet/ui/components/card";
+import { toApiError } from "@papaya-fleet/utils";
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -68,8 +69,9 @@ function LoginComponent() {
           navigate({ to: "/dashboard" });
         }, 100);
       }
-    } catch (error: any) {
-      toast.error(error.message || "An error occurred");
+    } catch (error: unknown) {
+      const apiError = toApiError(error);
+      toast.error(apiError.message || "An error occurred");
       setIsLoading(false);
     }
   };

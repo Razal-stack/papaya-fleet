@@ -125,7 +125,7 @@ export function FormModalBody({
   if (scrollable) {
     return (
       <ScrollArea className={cn("h-[calc(70vh-12rem)] px-1 pr-4", className)}>
-        {children}
+        <div>{children}</div>
       </ScrollArea>
     );
   }

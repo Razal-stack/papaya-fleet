@@ -23,22 +23,22 @@ describe("Vehicle Form Auto-fill", () => {
 
     // Check that date fields are either valid ISO strings or undefined
     if (fakeData.registration_expiry) {
-      expect(() => new Date(fakeData.registration_expiry!)).not.toThrow();
+      expect(() => new Date(fakeData.registration_expiry)).not.toThrow();
     }
     if (fakeData.insurance_expiry) {
-      expect(() => new Date(fakeData.insurance_expiry!)).not.toThrow();
+      expect(() => new Date(fakeData.insurance_expiry)).not.toThrow();
     }
     if (fakeData.last_service_date) {
-      expect(() => new Date(fakeData.last_service_date!)).not.toThrow();
+      expect(() => new Date(fakeData.last_service_date)).not.toThrow();
     }
     if (fakeData.next_service_date) {
-      expect(() => new Date(fakeData.next_service_date!)).not.toThrow();
+      expect(() => new Date(fakeData.next_service_date)).not.toThrow();
     }
     if (fakeData.purchase_date) {
-      expect(() => new Date(fakeData.purchase_date!)).not.toThrow();
+      expect(() => new Date(fakeData.purchase_date)).not.toThrow();
     }
     if (fakeData.lease_end_date) {
-      expect(() => new Date(fakeData.lease_end_date!)).not.toThrow();
+      expect(() => new Date(fakeData.lease_end_date)).not.toThrow();
     }
   });
 
